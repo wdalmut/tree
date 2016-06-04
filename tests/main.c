@@ -52,7 +52,7 @@ static char *test_list_existing_leafs() {
     btree_put(root, 120);
     btree_put(root, 124);
 
-    result *node = btree_inorder(root);
+    result *node = btree_inorder(root, NULL);
 
     mu_assert("The result list should not be empty", node != NULL);
 

@@ -37,28 +37,19 @@ leaf *btree_get(leaf *root, int value) {
     }
 }
 
-result *btree_inorder(leaf *root) {
-    result *pre = NULL;
+result *btree_inorder(leaf *root, result *tail) {
     if (root->right != NULL) {
-        pre = btree_inorder(root->right);
+        tail = btree_inorder(root->right, tail);
     }
 
     result *current = (result *)malloc(sizeof(result));
     current->value = root->value;
-    current->next = pre;
+    current->next = tail;
+    tail = current;
 
-    pre = NULL;
     if (root->left != NULL) {
-        pre = btree_inorder(root->left);
+        tail = btree_inorder(root->left, current);
     }
 
-    if (pre != NULL) {
-        result *tmp = pre;
-        while(tmp->next != NULL) {
-            tmp = tmp->next;
-        }
-        tmp->next = current;
-    }
-
-    return (pre != NULL) ? pre : current;
+    return tail;
 }

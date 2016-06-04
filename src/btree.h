@@ -20,5 +20,5 @@ typedef struct result_t result;
 
 void btree_put(leaf *, int);
 leaf *btree_get(leaf *, int);
-result *btree_inorder(leaf *);
+result *btree_inorder(leaf *, result *);
 #endif
